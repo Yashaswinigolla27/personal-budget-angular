@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+//import { Chart } from 'chart.js';
 import { Chart } from 'chart.js';
+import { DataService } from '../data.service';
+
+
 
 @Component({
   selector: 'pb-homepage',
@@ -26,17 +30,18 @@ export class HomepageComponent implements OnInit{
 
     labels: []
   };
+  http: any;
 
-  constructor(private http:HttpClient) {
-    const el = document.getElementById("myChart");
-    console.log("is my chart there?", el);
-  }
+  // constructor(private http:HttpClient) {
+  //   const el = document.getElementById("myChart");
+  //   console.log("is my chart there?", el);
+  // }
 
-  ngOnInit(): any;
+
 
   ngOnInit(): void {
 
-    this.http.get('/budget')
+    this.http.get('http://localhost:3030/budget')
     .subscribe((res: any) => {
       for (var i = 0; i < res.data.myBudget.length; i++) {
         this.dataSource.datasets[0].data[i] = res.myBudget[i].budget;
@@ -46,16 +51,28 @@ export class HomepageComponent implements OnInit{
     });
   }
 
+  constructor(private dataService: DataService) {}
 
+  // ngOnInit(): void {
+  //   this.dataService.data$.subscribe((data) => {
+  //     // Check if data is available and non-empty
+  //     if (data && data.myBudget) {
+  //       for (var i = 0; i < data.myBudget.length; i++) {
+  //         this.dataSource.datasets[0].data[i] = data.myBudget[i].budget;
+  //         this.dataSource.labels[i] = data.myBudget[i].title;
+  //       }
+  //       this.createChart(); // Call createChart() after updating the data
+  //     }
+  //   });
+  // }
 
   createChart() {
-    var ctx = document.getElementById("myChart") as HTMLCanvasElement;
+    var ctx = document.getElementById('myChart') as HTMLCanvasElement;
       var myPieChart = new Chart(ctx, {
           type: 'pie',
           data: this.dataSource
       });
   }
-
 
 }
 

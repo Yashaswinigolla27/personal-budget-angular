@@ -1,0 +1,27 @@
+// div.contact h2 {
+//   color: #4d5791;
+//   width: 100%;
+
+
+// }
+
+.center-box {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 41.85vh;
+  background-color: #f0f0f0;
+  border: 0px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.contact {
+  text-align: center;
+}
+
+.contact h2 {
+  margin: 10px 0; /* Add spacing between each <h2> element */
+  color: #4d5791;
+}
+
